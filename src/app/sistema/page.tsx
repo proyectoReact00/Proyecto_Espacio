@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function SistemaSolarPage() {
   const planetas = [
@@ -49,14 +50,13 @@ export default function SistemaSolarPage() {
       descripcion: 'El planeta más lejano del Sol, con fuertes vientos y color azul profundo.',
       estilo: 'top-[50%] left-[86%]',
     },
-    
   ];
 
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <div className="relative min-h-screen text-white overflow-hidden">
-      {/* Fondo en video */}
+
       <video
         className="absolute inset-0 w-full h-full object-cover z-0"
         src="/system.mp4"
@@ -66,17 +66,16 @@ export default function SistemaSolarPage() {
         playsInline
       />
 
-      {/* Encabezado */}
+  
       <div className="absolute top-8 w-full text-center z-20">
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-yellow-300 via-white to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+        <h1 className="text-4xl md:text-6xl font-bold text-black drop-shadow-lg">
           Viaje Interactivo al Sistema Solar
         </h1>
-        <p className="text-white/90 mt-2 text-lg italic">
+        <p className="text-black mt-2 text-lg italic">
           Explora los planetas como nunca antes
         </p>
       </div>
 
-      {/* Botones de planetas con hover */}
       {planetas.map((p, index) => (
         <div
           key={index}
@@ -84,14 +83,20 @@ export default function SistemaSolarPage() {
           onMouseEnter={() => setHovered(index)}
           onMouseLeave={() => setHovered(null)}
         >
-          <button
-            className="w-6 h-6 md:w-8 md:h-8 rounded-full border-2 border-white bg-white/30 backdrop-blur-md hover:scale-110 transition-all duration-300"
-            aria-label={p.nombre}
-          />
+          <span
+            className={`text-lg md:text-xl font-bold px-4 py-2 rounded-full bg-black/50 cursor-pointer hover:scale-110 transition-all duration-300 ${p.nombre === '☀️ Sol' ? 'text-black' : 'text-white'}`}
+          >
+            {p.nombre}
+          </span>
+
           {hovered === index && (
-            <div className="absolute top-10 left-1/2 -translate-x-1/2 w-64 p-4 rounded-xl bg-black/80 backdrop-blur-sm text-white border border-white/20 shadow-lg animate-fadeIn">
-              <h3 className="text-base font-bold mb-1">{p.nombre}</h3>
-              <p className="text-sm leading-snug">{p.descripcion}</p>
+            <div
+              className="absolute top-10 left-1/2 -translate-x-1/2 w-64 p-4 rounded-xl bg-white/[0.8] backdrop-blur-sm shadow-lg animate-fadeIn"
+            >
+              {/* CAMBIO CLAVE AQUÍ: Título de la descripción */}
+              <h3 className={`text-base font-bold mb-1 ${p.nombre === '☀️ Sol' ? 'text-black' : 'text-black'}`}>{p.nombre}</h3>
+              {/* CAMBIO CLAVE AQUÍ: Párrafo de la descripción */}
+              <p className={`text-sm leading-snug ${p.nombre === '☀️ Sol' ? 'text-black/90' : 'text-black/90'}`}>{p.descripcion}</p>
             </div>
           )}
         </div>

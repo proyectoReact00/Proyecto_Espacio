@@ -1,104 +1,166 @@
-import Image from "next/image";
-
+// src/app/page.tsx
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React from 'react'; // Importar React para JSX
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [activeTab, setActiveTab] = useState<string>('ciencia'); // <--- Añadiendo tipo string
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <section className="nasa-hero">
+        <div className="hero-text">
+          <h1>Curiosidades del Espacio</h1>
+          <p>
+            Explora el universo y descubre tu planeta natal con nosotros, en tu idioma.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        {/* Los botones de autenticación de Clerk se han movido a Navbar.tsx */}
+      </section>
+
+      <section className="tabs">
+        <div
+          className={`tab ${activeTab === 'ciencia' ? 'active' : ''}`}
+          onClick={() => setActiveTab('ciencia')}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Ciencia
+        </div>
+        <div
+          className={`tab ${activeTab === 'ninos' ? 'active' : ''}`}
+          onClick={() => setActiveTab('ninos')}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples 2
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          Space Place para niños
+        </div>
+        <div
+          className={`tab ${activeTab === 'aeronautica' ? 'active' : ''}`}
+          onClick={() => setActiveTab('aeronautica')}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          Aeronáutica
+        </div>
+      </section>
+
+      <section className="content-section">
+    
+        {activeTab === 'ciencia' && (
+          <div className="ciencia-section">
+            <h2>Exploración Científica de la NASA</h2>
+            <p className="ciencia-sub">
+              La NASA lidera investigaciones científicas que nos ayudan a entender el origen del universo, la evolución de los planetas y la vida misma.
+            </p>
+            <div className="ciencia-contenido">
+              <img src="/ciencia.jpg" alt="Imagen del espacio profundo" className="ciencia-img" />
+              <div className="ciencia-texto">
+                <h3>El Universo bajo la lupa</h3>
+                <p>
+                  Con potentes telescopios como el **James Webb** y el **Hubble**, la NASA explora regiones lejanas del universo.
+                </p>
+                <p>
+                  Además, con misiones como **Perseverance** en Marte, se investigan rastros de vida antigua.
+                </p>
+                <h4>🔭 Dato Curioso:</h4>
+                <p>
+                  La luz de muchas estrellas comenzó su viaje hace millones o miles de millones de años. ¡Estás viendo el pasado!
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+    
+        {activeTab === 'ninos' && (
+          <div className="ninos-section">
+            <h2>Space Place para niños</h2>
+            <p className="ninos-sub">
+              ¡Hola, exploradores pequeños! Aprende y diviértete con el espacio.
+            </p>
+
+            <div className="ninos-contenido">
+              <img src="/space-kids.jpg" alt="Niños astronautas" className="ninos-img" />
+              <div className="ninos-texto">
+                <h3>¿Sabías qué?</h3>
+                <p>
+                  En el espacio no hay gravedad, por lo que los astronautas **flotan**.
+                </p>
+                <h4>Dato Curioso:</h4>
+                <p>
+                  Un día en la Estación Espacial Internacional dura solo 90 minutos.
+                </p>
+                <h4>Actividad divertida:</h4>
+                <ol>
+                  <li>Dibuja un cohete colorido y ponle un nombre especial.</li>
+                  <li>¿Qué tres objetos llevarías a otro planeta?</li>
+                  <li>Escribe tu mini diario de astronauta.</li>
+                </ol>
+              </div>
+            </div>
+
+            <p className="ninos-video-intro">
+              🚀 ¡Y aquí tienes un video educativo en español sobre el origen de nuestro universo!
+            </p>
+            <div className="ninos-video">
+              <iframe
+                width="100%"
+                height="315"
+                src="/niños.mp4"
+                title="Sistema Solar para niños - video educativo"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ border: '0', borderRadius: '10px' }}
+              ></iframe>
+            </div>
+          </div>
+        )}
+
+        {/* Aeronáutica */}
+        {activeTab === 'aeronautica' && (
+          <div className="aeronautica-section">
+            <h2>Innovación Aeronáutica de la NASA</h2>
+            <p className="aeronautica-sub">
+              La NASA impulsa avances que mejoran cómo volamos, haciendo los viajes más rápidos y eficientes.
+            </p>
+
+            <div className="aeronautica-contenido">
+              <img src="/aeronautica-nasa.jpg" alt="Avión experimental X-59" className="aeronautica-img" />
+              <div className="aeronautica-texto">
+                <h3>Aviación silenciosa y eficiente</h3>
+                <p>
+                  Con proyectos como el X‑59 QueSST y X‑57 Maxwell, la NASA trabaja en tecnologías para vuelos sin boom sónico y eléctricos.
+                </p>
+                <h4>✈ Datos Curiosos:</h4>
+                <ul>
+                  <li>X‑59: vuela a Mach 1.42 sin boom sónico.</li>
+                  <li>X‑57: eléctrico, silencioso y eficiente.</li>
+                </ul>
+              </div>
+            </div>
+
+            <p className="aeronautica-video-intro">
+              🎬 Mira este video sobre el X‑59, el avión supersónico silencioso:
+            </p>
+            <div className="aeronautica-video">
+                      <iframe
+                width="100%"
+                height="315"
+                src="/avion.mp4"
+                title="Avion superSonico silencioso Explicado"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ border: '0', borderRadius: '10px' }}
+                ></iframe>
+            </div>
+          </div>
+        )}
+      </section>
+
+    <button
+  className="boton-flotante"
+  onClick={() => window.open('https://www.spacex.com/', '_blank')}
+  title="Explora SpaceX"
+>
+  🚀 Ir a mas  contenido
+</button>
+    </>
   );
 }

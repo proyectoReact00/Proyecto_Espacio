@@ -1,0 +1,175 @@
+/* app/comentarios/ComentariosPage.module.css */
+:root {
+  --primary-color: #00bcd4; /* Cian futurista */
+  --secondary-color: #673ab7; /* Púrpura profundo */
+  --text-color: #e0f7fa; /* Blanco azulado claro */
+  --bg-dark: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+  --border-glow: rgba(0, 188, 212, 0.5); /* Resplandor del borde */
+}
+
+/* Nota: No aplicamos estilos al 'body' aquí, ya que este es un CSS de módulo.
+   Los estilos globales del 'body' deberían estar en tu 'globals.css' existente. */
+
+.videoBackgroundContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Si tu globals.css tiene un fondo para el body, este contenedor lo cubrirá */
+  /* Asegúrate de que el body de tu globals.css no tenga un 'overflow: hidden'
+     que impida que este contenedor se posicione correctamente. */
+}
+
+.videoBackground {
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  object-fit: cover; /* Asegura que el video cubra todo el espacio */
+}
+
+.formOverlay {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-dark);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px var(--border-glow);
+  backdrop-filter: blur(8px); /* Efecto de desenfoque detrás del formulario */
+  border: 1px solid var(--primary-color);
+  animation: fadeIn 1.5s ease-in-out;
+  max-width: 500px; /* Limita el ancho del formulario */
+  width: 90%; /* Ajuste responsivo */
+  box-sizing: border-box; /* Incluye padding y border en el ancho */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.futuristicForm h2 {
+  color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 0 0 10px var(--primary-color);
+}
+
+.formIntroText {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.1em;
+  color: var(--text-color);
+  line-height: 1.5;
+  padding: 0 15px; /* Pequeño padding para el texto */
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--secondary-color);
+  border-radius: 8px;
+  background-color: rgba(2, 2, 2, 0.6);
+  color: var(--text-color);
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px var(--secondary-color); /* Sombra inicial */
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="email"]:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px var(--primary-color); /* Resplandor al enfocar */
+  background-color: rgba(5, 5, 5, 0.7);
+}
+
+.formGroup textarea {
+  resize: vertical; /* Permite redimensionar verticalmente */
+  min-height: 100px;
+}
+
+.submitButton {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background-color: var(--primary-color);
+  color: #000; /* Texto oscuro para contraste */
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px var(--primary-color);
+  letter-spacing: 1.5px;
+}
+
+.submitButton:hover {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  box-shadow: 0 0 25px var(--secondary-color);
+  transform: translateY(-3px); /* Pequeño efecto hover */
+}
+
+/* Media queries para responsividad */
+@media (max-width: 600px) {
+  .formOverlay {
+    padding: 25px;
+    width: 95%;
+  }
+
+  .futuristicForm h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .formIntroText {
+    font-size: 1em;
+    margin-bottom: 20px;
+  }
+
+  .formGroup label {
+    font-size: 0.8em;
+  }
+
+  .formGroup input,
+  .formGroup textarea {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .submitButton {
+    padding: 12px;
+    font-size: 1em;
+  }
+}
